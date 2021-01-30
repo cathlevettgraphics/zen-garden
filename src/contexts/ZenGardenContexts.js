@@ -1,5 +1,5 @@
 import { createContext, useState } from 'react';
-// import { useToasts } from 'react-toast-notifications';
+import { useToasts } from 'react-toast-notifications';
 
 // Create context
 export const GardenContext = createContext({
@@ -21,7 +21,7 @@ export const GardenProvider = (props) => {
   const [loading, setLoading] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(null);
-  // const { addToast } = useToasts();
+  const { addToast } = useToasts();
 
   const GARDEN_ENDPOINT = 'http://localhost:8000/trees';
 
@@ -49,7 +49,36 @@ export const GardenProvider = (props) => {
     }
   };
 
-  const addTree = () => {};
+  const addTree = async (formData) => {
+    console.log('adding', formData);
+    try {
+      const response = await fetch(GARDEN_ENDPOINT, {
+        method: postMessage,
+        headers: {
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      if (response.status !== 201) {
+        throw response;
+      }
+
+      // Add tree to array
+      const savedTree = await response.json();
+      console.log('got data', savedTree);
+      const newTrees = [...garden, savedTree];
+      localStorage.setItem('garden', JSON.stringify(newTrees));
+      setGarden(newTrees);
+      addToast(`Saved ${savedTree.treeName}`, {
+        appearance: 'success',
+      });
+    } catch (err) {
+      console.log(err.message);
+      addToast(`Error ${err.message} || ${err.statusText}`, {
+        appearance: 'error',
+      });
+    }
+  };
   const updateTree = () => {};
   const deleteTree = () => {};
 

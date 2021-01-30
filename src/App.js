@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { ToastProvider } from 'react-toast-notifications';
 import './../src/generics.css';
 import 'normalize.css';
 
@@ -12,14 +13,16 @@ import NotFound from './pages/NotFound/NotFound';
 function App() {
   return (
     <Router>
-      <GardenProvider>
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path={`/zen/morezen`} component={AddZen} />
-          <Route path={`/zen/tweak-zen/:id`} component={UpdateZen} />
-          <Route path="*" component={NotFound} />
-        </Switch>
-      </GardenProvider>
+      <ToastProvider autoDismiss={true}>
+        <GardenProvider>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path={`/zen/morezen`} component={AddZen} />
+            <Route path={`/zen/tweak-zen/:id`} component={UpdateZen} />
+            <Route path="*" component={NotFound} />
+          </Switch>
+        </GardenProvider>
+      </ToastProvider>
     </Router>
   );
 }
