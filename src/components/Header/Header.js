@@ -10,6 +10,11 @@ function Header() {
         <NavLink to="/zen/morezen">add zen</NavLink>
         <NavLink to="/zen/tweakzen">tweak zen</NavLink>
       </nav>
+      <h1>Zen garden</h1>
+      <p>
+        Add some green to your screen! Create and plan a chilled green space –
+        get some nature in your day!
+      </p>
     </header>
   );
 }
