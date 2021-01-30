@@ -1,11 +1,12 @@
 import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
 
 function UpdateZen() {
   return (
     <div className="page">
-      <main>
-        <Header />
-      </main>
+      <Header />
+      <main></main>
+      <Footer />
     </div>
   );
 }

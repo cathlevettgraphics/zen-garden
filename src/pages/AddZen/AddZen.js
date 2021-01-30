@@ -1,4 +1,5 @@
 import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
 
 function AddZen() {
   return (
@@ -6,6 +7,7 @@ function AddZen() {
       <main>
         <Header />
       </main>
+      <Footer />
     </div>
   );
 }

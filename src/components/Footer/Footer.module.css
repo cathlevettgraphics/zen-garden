@@ -1,0 +1,23 @@
+.footerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.mainLogo {
+  font-size: 3rem;
+  font-weight: 600;
+  letter-spacing: 8px;
+}
+
+.navLinks {
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  padding: 0;
+}
+
+.cathLevettGraphics {
+  letter-spacing: 1px;
+}

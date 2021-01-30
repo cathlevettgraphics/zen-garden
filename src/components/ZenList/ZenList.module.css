@@ -16,6 +16,9 @@
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(auto);
   grid-gap: 20px;
+  padding-block-end: 30px;
+  border-block-end: 5px solid #333;
+  margin-block-end: 20px;
 }
 
 .treeName {
