@@ -1,30 +1,47 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './ZenList.module.css';
+import { GardenContext } from '../../contexts/ZenGardenContexts';
 
-const GARDEN_ENDPOINT = 'http://localhost:8000/trees';
+// const GARDEN_ENDPOINT = 'http://localhost:8000/trees';
 
 function ZenList() {
-  const [garden, setGarden] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [loaded, setLoaded] = useState(false);
-  const [error, setError] = useState(null);
+  // const [garden, setGarden] = useState([]);
+  // const [loading, setLoading] = useState(false);
+  // const [loaded, setLoaded] = useState(false);
+  // const [error, setError] = useState(null);
 
+  // useEffect(() => {
+  //   async function getGarden() {
+  //     setLoading(true);
+  //     const response = await fetch(GARDEN_ENDPOINT);
+  //     const data = await response.json();
+  //     console.log('garden data', data);
+  //     setGarden(data);
+  //     setLoading(false);
+  //     setLoaded(true);
+  //   }
+  //   if (!loaded && !loading) {
+  //     getGarden();
+  //   }
+  //   return () => {};
+  // }, [garden, setGarden, setLoaded, setLoading]);
+
+  // Use context
+  const {
+    garden,
+    loading,
+    error,
+    fetchGarden,
+    addTree,
+    updateTree,
+    deleteTree,
+  } = useContext(GardenContext);
+
+  // Call fetchGarden
   useEffect(() => {
-    async function getGarden() {
-      setLoading(true);
-      const response = await fetch(GARDEN_ENDPOINT);
-      const data = await response.json();
-      console.log(data);
-      setGarden(data);
-      setLoading(false);
-      setLoaded(true);
-    }
-    if (!loaded && !loading) {
-      getGarden();
-    }
-    return () => {};
-  }, [garden, setGarden, setLoaded, setLoading]);
+    fetchGarden();
+  }, [fetchGarden]);
 
   return (
     <section>
