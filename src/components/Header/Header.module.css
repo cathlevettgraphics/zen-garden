@@ -1,0 +1,50 @@
+body {
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+}
+
+.headerContainer {
+  height: 250px;
+}
+
+.mainHeader {
+  border-block-end: 5px solid #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 20px;
+  margin-block-end: 30px;
+}
+
+.mainLogo {
+  font-size: 5rem;
+  font-weight: 600;
+  letter-spacing: 10px;
+}
+
+.mainNav {
+  width: 25%;
+}
+.navLinks {
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  width: 250px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.strapContainer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 0 30px 20px;
+  border-block-end: 5px solid #333;
+}
+
+.strapline {
+  width: 66%;
+  line-height: 1.5;
+  margin: 0;
+}
