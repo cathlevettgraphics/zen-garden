@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import styles from './ZenList.module.css';
 
 const GARDEN_ENDPOINT = 'http://localhost:8000/trees';
 
@@ -27,28 +28,38 @@ function ZenList() {
 
   return (
     <section>
-      <div className="gardenContainer">
+      <div className={styles.gardenContainer}>
         {loading && <p>loading ...</p>}
         {error && <p>error.message</p>}
 
-        <h1>All your zen in one place</h1>
-        <p>Add, update and delete your zen here</p>
+        <div className={styles.sectionHeader}>
+          <h1 className={styles.secondaryHeader}>All your zen in one place</h1>
+          <p className={styles.secondaryStrap}>
+            Add, update and delete your zen here
+          </p>
+        </div>
         {garden.length ? (
-          <ul>
+          <ul className={styles.gardenList}>
             {garden.map(
               ({ id, tree, treeName, leaves, height, minTemp, imageUrl }) => (
                 <li key={id}>
-                  <h3>{treeName}</h3>
-                  <p>{tree}</p>
-                  <img src={imageUrl} alt={treeName} width="200"></img>
-                  <p>{leaves} leaves</p>
-                  <p>
-                    Hardy to {minTemp}C and can reach up to {height} meters tall
-                  </p>
-                  <Link to={`/zen/tweak-zen/${id}`} className="updateZen">
-                    update your zen
+                  <h3 className={styles.treeName}>{treeName}</h3>
+                  <p className={styles.treeNameLatin}>{tree}</p>
+                  <img
+                    src={imageUrl}
+                    alt={treeName}
+                    width="200"
+                    className={styles.gardenImage}
+                  ></img>
+                  <p className={styles.treeLeaves}>{leaves} leaves</p>
+                  <p>Hardy to {minTemp}C</p>
+                  <Link
+                    to={`/zen/tweak-zen/${id}`}
+                    className={styles.updateZen}
+                  >
+                    update zen
                   </Link>
-                  <button className="deleteZen">delete your zen</button>
+                  <button className={styles.deleteZen}>delete zen</button>
                 </li>
               ),
             )}
