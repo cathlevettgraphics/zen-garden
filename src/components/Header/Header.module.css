@@ -22,14 +22,11 @@ body {
   letter-spacing: 10px;
 }
 
-.mainNav {
-  width: 25%;
-}
 .navLinks {
   font-size: 1.4rem;
   font-weight: 600;
   letter-spacing: 2px;
-  width: 250px;
+  width: 145px;
   display: flex;
   justify-content: space-between;
   align-items: center;

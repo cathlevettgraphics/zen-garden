@@ -11,7 +11,7 @@ function Header() {
           <nav className={styles.navLinks}>
             <NavLink to="/">home</NavLink>
             <NavLink to="/zen/morezen">add zen</NavLink>
-            <NavLink to="/zen/tweakzen">tweak zen</NavLink>
+            {/* <NavLink to="/zen/tweakzen">tweak zen</NavLink> */}
           </nav>
         </div>
         <div className={styles.strapContainer}>

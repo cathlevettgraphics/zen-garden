@@ -1,11 +1,18 @@
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
+import ZenForm from './../../components/ZenForm/ZenForm';
 
 function UpdateZen() {
   return (
     <div className="page">
       <Header />
-      <main></main>
+      <div>
+        <h1>Update and refresh your zen here</h1>
+        <p>Create your perfect green space</p>
+      </div>
+      <main>
+        <ZenForm />
+      </main>
       <Footer />
     </div>
   );

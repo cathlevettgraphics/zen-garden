@@ -7,9 +7,12 @@ function Footer() {
       <div className={styles.footerContainer}>
         <span className={styles.mainLogo}>zen garden</span>
         <nav className={styles.navLinks}>
-          <NavLink to="https://cathlevett-graphics.netlify.app/" className={styles.cathLevettGraphics}>
+          <a
+            href="https://cathlevett-graphics.netlify.app/"
+            className={styles.cathLevettGraphics}
+          >
             cath levett graphics
-          </NavLink>
+          </a>
         </nav>
       </div>
     </footer>
