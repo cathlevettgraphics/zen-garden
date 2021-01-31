@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useState, useEffect } from 'react';
 import { useToasts } from 'react-toast-notifications';
 
 // Create context
@@ -23,7 +23,7 @@ export const GardenProvider = (props) => {
   const [error, setError] = useState(null);
   const { addToast } = useToasts();
 
-  const GARDEN_ENDPOINT = 'http://localhost:8000/trees';
+  const GARDEN_ENDPOINT = 'http://localhost:8000/trees/';
 
   const fetchGarden = async () => {
     if (loading || loaded || error) {
@@ -35,8 +35,6 @@ export const GardenProvider = (props) => {
       const response = await fetch(GARDEN_ENDPOINT);
       if (response.status !== 200) {
         throw response;
-      } else {
-        setLoading(true);
       }
       const data = await response.json();
       localStorage.setItem('garden', JSON.stringify(data));
@@ -53,7 +51,7 @@ export const GardenProvider = (props) => {
     console.log('adding', formData);
     try {
       const response = await fetch(GARDEN_ENDPOINT, {
-        method: postMessage,
+        method: 'POST',
         headers: {
           'content-type': 'application/json',
         },
@@ -73,14 +71,92 @@ export const GardenProvider = (props) => {
         appearance: 'success',
       });
     } catch (err) {
-      console.log(err.message);
+      console.log(err);
       addToast(`Error ${err.message} || ${err.statusText}`, {
         appearance: 'error',
       });
     }
   };
-  const updateTree = () => {};
-  const deleteTree = () => {};
+
+  const updateTree = async (id, updates) => {
+    console.log('updating', id, updates);
+    let updatedTree = null;
+    try {
+      const response = await fetch(`${GARDEN_ENDPOINT}${id}`, {
+        method: 'PUT',
+        headers: {
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify(updates),
+      });
+      if (response.status !== 200) {
+        throw response;
+      }
+      // Get index
+      const index = garden.findIndex((tree) => tree.id === id);
+      console.log('index', index);
+
+      // Get the tree
+      const oldTree = garden[index];
+      console.log('old tree', oldTree);
+
+      // Merge new tree into the data
+      updatedTree = {
+        ...oldTree,
+        ...updates,
+      };
+      console.log('updated tree', updatedTree);
+
+      // Recreate the garden array
+      const updatedTrees = [
+        ...garden.slice(0, index),
+        updateTree,
+        ...garden.slice(index + 1),
+      ];
+
+      // Add to local storage
+      localStorage.setItem('garden', JSON.stringify(updatedTrees));
+      addToast(`Updated ${updatedTree.name}`, {
+        appearance: 'success',
+      });
+      setGarden(updatedTree);
+    } catch {}
+  };
+
+  // Delete tree
+  const deleteTree = async (id) => {
+    let deletedTree = null;
+    try {
+      const response = await fetch(`${GARDEN_ENDPOINT}${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (response.status !== 204) {
+        throw response;
+      }
+      // Get index
+      const index = garden.findIndex((tree) => tree.id === id);
+      deletedTree = garden[index];
+      console.log(deletedTree);
+      // recreate the garden array without that tree
+      const updatedTree = [
+        ...garden.slice(0, index),
+        ...garden.slice(index + 1),
+      ];
+      localStorage.setItem('garden', JSON.stringify(updatedTree));
+      setGarden(updatedTree);
+      addToast(`Deleted ${deletedTree.treeName}`, {
+        appearance: 'success',
+      });
+    } catch (err) {
+      console.log(err);
+      addToast(`Error: Failed to update ${deletedTree.treeName}`, {
+        appearance: 'error',
+      });
+    }
+  };
 
   return (
     <GardenContext.Provider

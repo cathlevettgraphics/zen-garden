@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './ZenList.module.css';
-import { GardenContext } from '../../contexts/ZenGardenContexts';
+import { GardenContext } from './../../contexts/ZenGardenContexts';
 
 // const GARDEN_ENDPOINT = 'http://localhost:8000/trees';
 
@@ -28,15 +28,9 @@ function ZenList() {
   // }, [garden, setGarden, setLoaded, setLoading]);
 
   // Use context
-  const {
-    garden,
-    loading,
-    error,
-    fetchGarden,
-    addTree,
-    updateTree,
-    deleteTree,
-  } = useContext(GardenContext);
+  const { fetchGarden, deleteTree, loading, error, garden } = useContext(
+    GardenContext,
+  );
 
   // Call fetchGarden
   useEffect(() => {
@@ -46,10 +40,9 @@ function ZenList() {
   return (
     <section>
       <div className={styles.gardenContainer}>
-        {loading && <p>loading ...</p>}
-        {error && <p>error.message</p>}
-
         <div className={styles.sectionHeader}>
+          {loading && <p>loading ...</p>}
+          {error && <p>error.message</p>}
           <h1 className={styles.secondaryHeader}>All your zen in one place</h1>
           <p className={styles.secondaryStrap}>
             Add, update and delete your zen here
@@ -65,7 +58,6 @@ function ZenList() {
                   <img
                     src={imageUrl}
                     alt={treeName}
-                    width="200"
                     className={styles.gardenImage}
                   ></img>
                   <p className={styles.treeLeaves}>{leaves} leaves</p>
@@ -76,7 +68,12 @@ function ZenList() {
                   >
                     update zen
                   </Link>
-                  <button className={styles.deleteZen}>delete zen</button>
+                  <button
+                    onClick={() => deleteTree(id)}
+                    className={styles.deleteZen}
+                  >
+                    delete zen
+                  </button>
                 </li>
               ),
             )}

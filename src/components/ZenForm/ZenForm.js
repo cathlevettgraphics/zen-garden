@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-import { appendErrors, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { v4 as uuidv4 } from 'uuid';
@@ -23,7 +23,7 @@ function ZenForm() {
   const treeToBeUpdated = garden.find(({ id }) => id === id);
 
   let defaultValues = {
-    id: uuidv4(),
+    id: '',
     name: '',
     treeName: '',
     leaves: '',
@@ -35,7 +35,7 @@ function ZenForm() {
   let submitHandler = () => {};
 
   if (id) {
-    submitHandler = (vals, e) => {
+    submitHandler = (vals) => {
       console.log('update values', vals);
       updateTree(id, vals);
       history.push('/');
@@ -43,10 +43,10 @@ function ZenForm() {
     if (treeToBeUpdated) {
       defaultValues = treeToBeUpdated;
     } else {
-      throw new Error(`Couldn't finf the tree with id ${id}`);
+      throw new Error(`Couldn't find the tree with id ${id}`);
     }
   } else {
-    submitHandler = (vals, e) => {
+    submitHandler = (vals) => {
       console.log('add value', vals);
       reset(defaultValues);
       addTree(vals);
@@ -60,10 +60,10 @@ function ZenForm() {
     defaultValues: defaultValues,
   });
 
-  const { isDirty, isValid, isSubmitting } = formState;
+  // const { isDirty, isValid, isSubmitting } = formState;
 
   return (
-    <form onSumbit={handleSubmit(submitHandler)}>
+    <form onSubmit={handleSubmit(submitHandler)}>
       {/* Tree Name */}
       <div className="form-row">
         <label htmlFor="treeName" className="fieldName">
@@ -114,7 +114,7 @@ function ZenForm() {
           ref={register}
           aria-invalid={errors.leaves ? 'true' : 'false'}
         />
-        {errors.name && (
+        {errors.leaves && (
           <label htmlFor="leaves" role="alert" className="error">
             {errors.leaves?.message}
           </label>
@@ -183,9 +183,7 @@ function ZenForm() {
         <button type="reset" onClick={reset}>
           Reset
         </button>
-        <button type="submit" disabled={isSubmitting || !(isValid && isDirty)}>
-          Submit
-        </button>
+        <button type="submit">Submit</button>
       </div>
     </form>
   );

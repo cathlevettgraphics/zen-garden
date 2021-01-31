@@ -1,14 +1,14 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { ToastProvider } from 'react-toast-notifications';
 import './../src/generics.css';
 import 'normalize.css';
-
-import { GardenProvider } from './contexts/ZenGardenContexts';
 
 import Home from './pages/Home/Home';
 import AddZen from './pages/AddZen/AddZen';
 import UpdateZen from './pages/UpdateZen/UpdateZen';
 import NotFound from './pages/NotFound/NotFound';
+
+import { GardenProvider } from './contexts/ZenGardenContexts';
+import { ToastProvider } from 'react-toast-notifications';
 
 function App() {
   return (
