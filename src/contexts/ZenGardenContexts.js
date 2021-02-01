@@ -133,13 +133,13 @@ export const GardenProvider = (props) => {
           'Content-Type': 'application/json',
         },
       });
-      if (response.status !== 204) {
+      if (response.status !== 200) {
         throw response;
       }
       // Get index
       const index = garden.findIndex((tree) => tree.id === id);
       deletedTree = garden[index];
-      console.log(deletedTree);
+      // console.log({ deletedTree, index });
       // recreate the garden array without that tree
       const updatedTree = [
         ...garden.slice(0, index),
@@ -147,7 +147,7 @@ export const GardenProvider = (props) => {
       ];
       localStorage.setItem('garden', JSON.stringify(updatedTree));
       setGarden(updatedTree);
-      addToast(`Deleted ${deletedTree.treeName}`, {
+      addToast(`Deleted ${deletedTree.name}`, {
         appearance: 'success',
       });
     } catch (err) {

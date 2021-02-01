@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -11,7 +11,6 @@ const schema = yup.object().shape({
   name: yup.string().required(),
   treeName: yup.string().required(),
   leaves: yup.string().required(),
-  height: yup.number().positive().integer().required(),
   minTemp: yup.number().integer().required(),
   imageUrl: yup.string().url(),
 });
@@ -23,11 +22,9 @@ function ZenForm() {
   const treeToBeUpdated = garden.find(({ id }) => id === id);
 
   let defaultValues = {
-    id: '',
     name: '',
     treeName: '',
     leaves: '',
-    height: '',
     minTemp: '',
     imageUrl: '',
   };
@@ -60,7 +57,7 @@ function ZenForm() {
     defaultValues: defaultValues,
   });
 
-  // const { isDirty, isValid, isSubmitting } = formState;
+  const { isDirty, isValid, isSubmitting } = formState;
 
   return (
     <form onSubmit={handleSubmit(submitHandler)}>
@@ -117,25 +114,6 @@ function ZenForm() {
         {errors.leaves && (
           <label htmlFor="leaves" role="alert" className="error">
             {errors.leaves?.message}
-          </label>
-        )}
-      </div>
-
-      {/* height */}
-      <div className="form-row">
-        <label htmlFor="height" className="fieldName">
-          Height
-        </label>
-        <input
-          id="height"
-          type="text"
-          name="height"
-          ref={register}
-          aria-invalid={errors.height ? 'true' : 'false'}
-        />
-        {errors.height && (
-          <label htmlFor="height" role="alert" className="error">
-            {errors.height?.message}
           </label>
         )}
       </div>
