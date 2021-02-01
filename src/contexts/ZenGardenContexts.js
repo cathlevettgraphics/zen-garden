@@ -85,16 +85,16 @@ export const GardenProvider = (props) => {
       const response = await fetch(`${GARDEN_ENDPOINT}${id}`, {
         method: 'PUT',
         headers: {
-          'content-type': 'application/json',
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(updates),
       });
       if (response.status !== 200) {
         throw response;
       }
-      // Get index
+      // !! Get index – this isn't working
       const index = garden.findIndex((tree) => tree.id === id);
-      console.log('index', index);
+      console.log('index of tree to update', index);
 
       // Get the tree
       const oldTree = garden[index];
@@ -110,7 +110,7 @@ export const GardenProvider = (props) => {
       // Recreate the garden array
       const updatedTrees = [
         ...garden.slice(0, index),
-        updateTree,
+        updatedTree,
         ...garden.slice(index + 1),
       ];
 
@@ -119,7 +119,7 @@ export const GardenProvider = (props) => {
       addToast(`Updated ${updatedTree.name}`, {
         appearance: 'success',
       });
-      setGarden(updatedTree);
+      setGarden(updatedTrees);
     } catch {}
   };
 
@@ -141,12 +141,12 @@ export const GardenProvider = (props) => {
       deletedTree = garden[index];
       // console.log({ deletedTree, index });
       // recreate the garden array without that tree
-      const updatedTree = [
+      const updatedTrees = [
         ...garden.slice(0, index),
         ...garden.slice(index + 1),
       ];
-      localStorage.setItem('garden', JSON.stringify(updatedTree));
-      setGarden(updatedTree);
+      localStorage.setItem('garden', JSON.stringify(updatedTrees));
+      setGarden(updatedTrees);
       addToast(`Deleted ${deletedTree.name}`, {
         appearance: 'success',
       });

@@ -3,7 +3,6 @@ import { useParams, useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { v4 as uuidv4 } from 'uuid';
 
 import { GardenContext } from './../../contexts/ZenGardenContexts';
 
@@ -17,7 +16,7 @@ const schema = yup.object().shape({
 
 function ZenForm() {
   let { id } = useParams();
-  let { history } = useHistory();
+  let history = useHistory();
   const { addTree, updateTree, garden } = useContext(GardenContext);
 
   let defaultValues = {

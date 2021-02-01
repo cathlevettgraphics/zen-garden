@@ -51,7 +51,7 @@ function ZenList() {
         {garden.length ? (
           <ul className={styles.gardenList}>
             {garden.map(({ id, tree, name, leaves, minTemp, imageUrl }) => (
-              <li key={id}>
+              <li key={id} id={id}>
                 <h3 className={styles.treeName}>{name}</h3>
                 <p className={styles.treeNameLatin}>{tree}</p>
                 <img
@@ -61,7 +61,7 @@ function ZenList() {
                 ></img>
                 <p className={styles.treeLeaves}>{leaves} leaves</p>
                 <p>Hardy to {minTemp}C</p>
-                <Link to={`/zen/tweak-zen/${id}`} className={styles.updateZen}>
+                <Link to={`/zen/tweakzen/${id}`} className={styles.updateZen}>
                   update zen
                 </Link>
                 <button

@@ -18,7 +18,7 @@ function App() {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path={`/zen/morezen`} component={AddZen} />
-            <Route path={`/zen/tweak-zen/:id`} component={UpdateZen} />
+            <Route path={`/zen/tweakzen/:id`} component={UpdateZen} />
             <Route path="*" component={NotFound} />
           </Switch>
         </GardenProvider>
