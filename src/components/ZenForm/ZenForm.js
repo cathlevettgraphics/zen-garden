@@ -19,9 +19,9 @@ function ZenForm() {
   let { id } = useParams();
   let { history } = useHistory();
   const { addTree, updateTree, garden } = useContext(GardenContext);
-  const treeToBeUpdated = garden.find(({ id }) => id === id);
 
   let defaultValues = {
+    id: '',
     name: '',
     tree: '',
     leaves: '',
@@ -32,6 +32,7 @@ function ZenForm() {
   let submitHandler = () => {};
 
   if (id) {
+    const treeToBeUpdated = garden.find(({ id }) => id === id);
     submitHandler = (vals) => {
       console.log('update values', vals);
       updateTree(id, vals);
