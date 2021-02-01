@@ -9,7 +9,7 @@ import { GardenContext } from './../../contexts/ZenGardenContexts';
 
 const schema = yup.object().shape({
   name: yup.string().required(),
-  treeName: yup.string().required(),
+  tree: yup.string().required(),
   leaves: yup.string().required(),
   minTemp: yup.number().integer().required(),
   imageUrl: yup.string().url(),
@@ -23,7 +23,7 @@ function ZenForm() {
 
   let defaultValues = {
     name: '',
-    treeName: '',
+    tree: '',
     leaves: '',
     minTemp: '',
     imageUrl: '',
@@ -61,26 +61,26 @@ function ZenForm() {
 
   return (
     <form onSubmit={handleSubmit(submitHandler)}>
-      {/* Tree Name */}
+      {/* name */}
       <div className="form-row">
-        <label htmlFor="treeName" className="fieldName">
+        <label htmlFor="name" className="fieldName">
           Name
         </label>
         <input
-          id="treeName"
+          id="name"
           type="text"
-          name="treeName"
+          name="name"
           ref={register}
-          aria-invalid={errors.treeName ? 'true' : 'false'}
+          aria-invalid={errors.name ? 'true' : 'false'}
         />
-        {errors.treeName && (
-          <label htmlFor="treeName" role="alert" className="error">
-            {errors.treeName?.message}
+        {errors.name && (
+          <label htmlFor="name" role="alert" className="error">
+            {errors.name?.message}
           </label>
         )}
       </div>
 
-      {/* Name */}
+      {/* tree */}
       <div className="form-row">
         <label htmlFor="tree" className="fieldName">
           Latin name

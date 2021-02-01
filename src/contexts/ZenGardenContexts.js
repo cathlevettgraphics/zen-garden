@@ -67,7 +67,7 @@ export const GardenProvider = (props) => {
       const newTrees = [...garden, savedTree];
       localStorage.setItem('garden', JSON.stringify(newTrees));
       setGarden(newTrees);
-      addToast(`Saved ${savedTree.treeName}`, {
+      addToast(`Saved ${savedTree.name}`, {
         appearance: 'success',
       });
     } catch (err) {
@@ -152,7 +152,7 @@ export const GardenProvider = (props) => {
       });
     } catch (err) {
       console.log(err);
-      addToast(`Error: Failed to update ${deletedTree.treeName}`, {
+      addToast(`Error: Failed to update ${deletedTree.name}`, {
         appearance: 'error',
       });
     }
