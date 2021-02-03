@@ -3,6 +3,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import styles from './ZenForm.module.css';
 
 import { GardenContext } from './../../contexts/ZenGardenContexts';
 
@@ -31,7 +32,8 @@ function ZenForm() {
   let submitHandler = () => {};
 
   if (id) {
-    const treeToBeUpdated = garden.find(({ id }) => id === id);
+    // Alias the id from the data to avoid collision with useParams()
+    const treeToBeUpdated = garden.find(({ id: ID }) => ID === id);
     submitHandler = (vals) => {
       console.log('update values', vals);
       updateTree(id, vals);
@@ -60,7 +62,7 @@ function ZenForm() {
   const { isDirty, isValid, isSubmitting } = formState;
 
   return (
-    <form onSubmit={handleSubmit(submitHandler)}>
+    <form onSubmit={handleSubmit(submitHandler)} className={styles.zenForm}>
       {/* name */}
       <div className="form-row">
         <label htmlFor="name" className="fieldName">
@@ -161,7 +163,9 @@ function ZenForm() {
         <button type="reset" onClick={reset}>
           Reset
         </button>
-        <button type="submit">Submit</button>
+        <button type="submit" disabled={isSubmitting || !(isValid && isDirty)}>
+          Submit
+        </button>
       </div>
     </form>
   );

@@ -92,9 +92,8 @@ export const GardenProvider = (props) => {
       if (response.status !== 200) {
         throw response;
       }
-      // !! Get index – this isn't working
+      // Changed database id to string as that is what useParam uses
       const index = garden.findIndex((tree) => tree.id === id);
-      console.log('index of tree to update', index);
 
       // Get the tree
       const oldTree = garden[index];
@@ -120,7 +119,12 @@ export const GardenProvider = (props) => {
         appearance: 'success',
       });
       setGarden(updatedTrees);
-    } catch {}
+    } catch (err) {
+      console.log(err);
+      addToast(`Error: Failed to update zen ${updatedTree.name}`, {
+        appearance: 'error',
+      });
+    }
   };
 
   // Delete tree

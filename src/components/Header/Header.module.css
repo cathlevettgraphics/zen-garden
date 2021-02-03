@@ -1,10 +1,11 @@
-body {
-  font-family: 'JetBrains Mono', monospace;
-  text-transform: uppercase;
-}
+/* Breakpoints */
+/* mobile: 375px;
+tablet: 770px;
+desktop: 995px */
 
 .headerContainer {
   height: 250px;
+  width: 100vw;
 }
 
 .mainHeader {
