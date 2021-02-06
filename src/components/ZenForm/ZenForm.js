@@ -64,8 +64,8 @@ function ZenForm() {
   return (
     <form onSubmit={handleSubmit(submitHandler)} className={styles.zenForm}>
       {/* name */}
-      <div className="form-row">
-        <label htmlFor="name" className="fieldName">
+      <div className={styles.formRow}>
+        <label htmlFor="name" className={styles.fieldName}>
           Name
         </label>
         <input
@@ -74,6 +74,7 @@ function ZenForm() {
           name="name"
           ref={register}
           aria-invalid={errors.name ? 'true' : 'false'}
+          className={styles.inputField}
         />
         {errors.name && (
           <label htmlFor="name" role="alert" className="error">
@@ -83,8 +84,8 @@ function ZenForm() {
       </div>
 
       {/* tree */}
-      <div className="form-row">
-        <label htmlFor="tree" className="fieldName">
+      <div className={styles.formRow}>
+        <label htmlFor="tree" className={styles.fieldName}>
           Latin name
         </label>
         <input
@@ -93,6 +94,7 @@ function ZenForm() {
           name="tree"
           ref={register}
           aria-invalid={errors.tree ? 'true' : 'false'}
+          className={styles.inputField}
         />
         {errors.tree && (
           <label htmlFor="tree" role="alert" className="error">
@@ -102,8 +104,8 @@ function ZenForm() {
       </div>
 
       {/* Leaves */}
-      <div className="form-row">
-        <label htmlFor="leaves" className="fieldName">
+      <div className={styles.formRow}>
+        <label htmlFor="leaves" className={styles.fieldName}>
           Leaves
         </label>
         <input
@@ -112,6 +114,7 @@ function ZenForm() {
           name="leaves"
           ref={register}
           aria-invalid={errors.leaves ? 'true' : 'false'}
+          className={styles.inputField}
         />
         {errors.leaves && (
           <label htmlFor="leaves" role="alert" className="error">
@@ -121,8 +124,8 @@ function ZenForm() {
       </div>
 
       {/* Min temp */}
-      <div className="form-row">
-        <label htmlFor="minTemp" className="fieldName">
+      <div className={styles.formRow}>
+        <label htmlFor="minTemp" className={styles.fieldName}>
           Minimum temperature
         </label>
         <input
@@ -131,6 +134,7 @@ function ZenForm() {
           name="minTemp"
           ref={register}
           aria-invalid={errors.minTemp ? 'true' : 'false'}
+          className={styles.inputField}
         />
         {errors.minTemp && (
           <label htmlFor="minTemp" role="alert" className="error">
@@ -140,8 +144,8 @@ function ZenForm() {
       </div>
 
       {/* Image url */}
-      <div className="form-row">
-        <label htmlFor="imageUrl" className="fieldName">
+      <div className={styles.formRow}>
+        <label htmlFor="imageUrl" className={styles.fieldName}>
           Image url
         </label>
         <input
@@ -150,6 +154,7 @@ function ZenForm() {
           name="imageUrl"
           ref={register}
           aria-invalid={errors.imageUrl ? 'true' : 'false'}
+          className={styles.inputField}
         />
         {errors.imageUrl && (
           <label htmlFor="imageUrl" role="alert" className="error">
@@ -159,11 +164,15 @@ function ZenForm() {
       </div>
 
       {/* form row controls */}
-      <div className="form-row-controls">
-        <button type="reset" onClick={reset}>
+      <div className={styles.formRowControls}>
+        <button type="reset" onClick={reset} className={styles.resetForm}>
           Reset
         </button>
-        <button type="submit" disabled={isSubmitting || !(isValid && isDirty)}>
+        <button
+          type="submit"
+          disabled={isSubmitting || !(isValid && isDirty)}
+          className={styles.submitForm}
+        >
           Submit
         </button>
       </div>

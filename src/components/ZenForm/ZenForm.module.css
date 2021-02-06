@@ -1,5 +1,68 @@
-.zenForm {
-  padding-block-end: 30px;
+.sectionHeader {
+  padding: 10px 20px;
   border-block-end: 5px solid #333;
+  margin-block-end: 30px;
+}
+
+.zenForm {
+  padding: 0px 20px;
+  margin-block-end: 30px;
+}
+
+@media (min-width: 501px) {
+  .zenForm {
+    max-inline-size: 500px;
+  }
+}
+
+.secondaryHeader {
+  font-size: 3rem;
+  margin: 0;
+  margin-bottom: 10px;
+}
+.formRow {
   margin-block-end: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.inputField {
+  padding: 10px;
+  border: 2px solid #333;
+}
+
+.zenForm .formRow:nth-child(5) {
+  margin-block-end: 30px;
+}
+
+.formRowControls {
+  display: flex;
+  justify-content: space-between;
+}
+
+.resetForm,
+.submitForm {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  width: 48%;
+  border: 2px solid #333;
+  display: inline-block;
+  padding: 10px;
+  text-align: center;
+  outline: 0;
+  cursor: pointer;
+  background-color: #fff;
+}
+
+.resetForm:hover {
+  font-weight: 700;
+  text-decoration: none;
+  color: #55a630;
+}
+
+.fieldName {
+  font-size: 1.4rem;
+  margin-block-end: 5px;
+  letter-spacing: 1px;
 }

@@ -9,9 +9,12 @@ function Header() {
         <div className={styles.mainHeader}>
           <span className={styles.mainLogo}>zen garden</span>
           <nav className={styles.navLinks}>
-            <NavLink to="/">home</NavLink>
-            <NavLink to="/zen/morezen">add zen</NavLink>
-            {/* <NavLink to="/zen/tweakzen">tweak zen</NavLink> */}
+            <NavLink to="/" className={styles.link}>
+              home
+            </NavLink>
+            <NavLink to="/zen/morezen" className={styles.link}>
+              add zen
+            </NavLink>
           </nav>
         </div>
         <div className={styles.strapContainer}>

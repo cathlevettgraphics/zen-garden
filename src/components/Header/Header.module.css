@@ -4,15 +4,15 @@ tablet: 770px;
 desktop: 995px */
 
 .headerContainer {
-  height: 250px;
   width: 100vw;
+  margin-block-end: 20px;
 }
 
 .mainHeader {
   border-block-end: 5px solid #333;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   padding: 30px 20px;
   margin-block-end: 30px;
 }
@@ -21,28 +21,40 @@ desktop: 995px */
   font-size: 5rem;
   font-weight: 600;
   letter-spacing: 10px;
+  margin-block-end: 20px;
 }
 
 .navLinks {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   font-weight: 600;
   letter-spacing: 2px;
-  width: 145px;
+  width: 165px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.link {
+  transition: 0.2s;
+}
+
+.link:hover {
+  font-weight: 700;
+  text-decoration: none;
+  color: #55a630;
 }
 
 .strapContainer {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding: 0 0 30px 20px;
+  width: 100vw;
   border-block-end: 5px solid #333;
 }
 
 .strapline {
-  width: 66%;
+  padding: 5px 20px;
   line-height: 1.5;
-  margin: 0;
+  max-inline-size: 500px;
+  margin-block-end: 20px;
 }

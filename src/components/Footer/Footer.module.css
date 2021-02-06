@@ -1,8 +1,9 @@
 .footerContainer {
+  border-block-start: 5px solid #333;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 20px;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px 20px;
 }
 
 .mainLogo {
@@ -15,9 +16,17 @@
   font-size: 1.4rem;
   font-weight: 600;
   letter-spacing: 2px;
-  padding: 0;
+  padding: 10px 0;
 }
 
 .cathLevettGraphics {
   letter-spacing: 1px;
+  display: block;
+  transition: 0.2s;
+}
+
+.cathLevettGraphics:hover {
+  font-weight: 700;
+  text-decoration: none;
+  color: #55a630;
 }

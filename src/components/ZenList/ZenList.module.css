@@ -1,33 +1,56 @@
 .sectionHeader {
-  margin-top: 0;
   padding: 10px 20px;
   border-block-end: 5px solid #333;
   margin-block-end: 30px;
 }
 
 .secondaryHeader {
+  font-size: 3rem;
   margin: 0;
   margin-bottom: 10px;
 }
 
 .gardenList {
+  width: 100vw;
+  margin: auto;
   padding: 0 20px;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(auto);
-  grid-gap: 20px;
-  padding-block-end: 30px;
-  border-block-end: 5px solid #333;
+  grid-gap: 10px;
+  margin-block-end: 20px;
+}
+
+@media (min-width: 501px) {
+  .gardenList {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  .gardenList {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 961px) {
+  .gardenList {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+.treeItem {
+  width: 100%;
   margin-block-end: 20px;
 }
 
 .treeName {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   margin-block-end: 5px;
 }
 
 .treeNameLatin {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   text-transform: capitalize;
   font-weight: 100;
   font-style: italic;
@@ -42,10 +65,11 @@
 }
 
 .treeLeaves {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   text-transform: capitalize;
   font-weight: 100;
   font-style: italic;
+  margin-block-end: 10px;
 }
 
 .updateZen {
@@ -54,6 +78,14 @@
   padding: 10px;
   text-align: center;
   margin-block-end: 10px;
+  letter-spacing: 1px;
+  transition: 0.2s;
+}
+
+.updateZen:hover {
+  font-weight: 700;
+  text-decoration: none;
+  color: #55a630;
 }
 
 .deleteZen {
@@ -66,4 +98,12 @@
   outline: 0;
   cursor: pointer;
   background-color: #fff;
+  letter-spacing: 1px;
+  transition: 0.2s;
+}
+
+.deleteZen:hover {
+  font-weight: 700;
+  text-decoration: none;
+  color: #55a630;
 }
