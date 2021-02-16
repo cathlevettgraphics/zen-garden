@@ -1,58 +1,47 @@
 import React from 'react';
-import { useState, useContext, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { GardenContext } from './../../contexts/ZenGardenContexts';
 
-function ZenSearch({ handleOnSubmit, searchTerm, handleOnChange }) {
-  // const SEARCH_ENDPOINT = 'http://localhost:8000/trees?q=';
+// const SEARCH_ENDPOINT = 'http://localhost:8000/trees?q=';
 
-  // const [searchTerm, setSearchTerm] = useState('');
-  // const [garden2, setGarden2] = useState([]);
+function ZenSearch() {
+  const [garden, setGarden] = useState(() => {
+    return JSON.parse(localStorage.getItem('garden')) || [];
+  });
 
-  // const { searchGarden } = useContext(GardenContext);
+  const [filteredTree, setFilteredTree] = useState(() => [...garden]);
+  const [searchTerm, setSearchTerm] = useState('');
 
-  // function handleOnSubmit(e) {
-  //   e.preventDefault();
-  // }
+  let handleChange = (e) => {
+    console.log(e.target.value);
+    setSearchTerm(e.target.value);
+  };
 
-  // function handleOnChange(e) {
-  //   setSearchTerm(e.target.value);
-  //   console.log(e.target.value);
-
-  // fetch(SEARCH_ENDPOINT + searchTerm)
-  //   .then((res) => res.json())
-  //   .then((data) => {
-  //     console.log('the filtered garden based on search is:', data);
-  //     setGarden2(data);
-  //   });
-  // setSearchTerm('');
-
-  //   useEffect(() => {
-  //     fetchGarden();
-  //   }, [fetchGarden]);
-  // }
-
-  // Use context
-  const { searchGarden } = useContext(GardenContext);
-
-  // Call searchGarden
   useEffect(() => {
-    searchGarden();
-  }, [searchGarden]);
+    // Filter
+    const filtered = garden.filter((tree) =>
+      tree.name.toLowerCase().includes(searchTerm),
+    );
+    console.log('filtered trees', filtered);
+    // I would expect set garden here to render the filtered trees
+    console.log('current garden', garden);
+    setGarden(filtered);
+    console.log('new garden', garden);
+  }, [filteredTree, searchTerm, setGarden]);
 
   return (
     <div>
-      <form onSubmit={handleOnSubmit}>
+      <form>
         <label>Search</label>
         <input
           type="text"
           placeholder="search"
           className="search"
+          onChange={handleChange}
           value={searchTerm}
-          onChange={handleOnChange}
         ></input>
       </form>
     </div>
   );
 }
-
 export default ZenSearch;

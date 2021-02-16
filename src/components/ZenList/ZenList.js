@@ -47,7 +47,7 @@ function ZenList() {
           <p className={styles.secondaryStrap}>
             Add, update and delete your zen here
           </p>
-          {/* <ZenSearch /> */}
+          <ZenSearch />
         </div>
         {garden.length ? (
           <ul className={styles.gardenList}>

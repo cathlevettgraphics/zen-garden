@@ -11,7 +11,6 @@ export const GardenContext = createContext({
   loading: false,
   error: null,
   garden: [],
-  // searchGarden: () => {},
 });
 
 export const GardenProvider = (props) => {
@@ -23,29 +22,10 @@ export const GardenProvider = (props) => {
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(null);
   const { addToast } = useToasts();
-  // const [searchTerm, setSearchTerm] = useState('');
 
   const GARDEN_ENDPOINT = 'http://localhost:8000/trees/';
-  const SEARCH_ENDPOINT = 'http://localhost:8000/trees?q=';
 
-  // const searchGarden = async () => {
-  //   function handleOnSubmit(e) {
-  //     e.preventDefault();
-  //   }
-
-  //   function handleOnChange(e) {
-  //     setSearchTerm(e.target.value);
-  //     console.log(e.target.value);
-  //   }
-
-  //   const res = await fetch(SEARCH_ENDPOINT + searchTerm);
-
-  //   const data = await res.json();
-  //   console.log('the filtered garden based on search is:', data);
-  //   setGarden(data);
-  //   setLoading(false);
-  //   setLoaded(true);
-  // };
+  const searchGarden = async () => {};
 
   const fetchGarden = async () => {
     if (loading || loaded || error) {
@@ -194,7 +174,6 @@ export const GardenProvider = (props) => {
         addTree,
         updateTree,
         deleteTree,
-        // searchGarden,
       }}
     >
       {props.children}
