@@ -45,7 +45,7 @@ function ZenList() {
           {error && <p>error.message</p>}
           <h1 className={styles.secondaryHeader}>All your zen in one place</h1>
           <p className={styles.secondaryStrap}>
-            Add, update and delete your zen here
+            Add, update and delete your garden
           </p>
           <ZenSearch />
         </div>

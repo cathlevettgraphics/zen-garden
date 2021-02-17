@@ -1,42 +1,30 @@
 import React from 'react';
-import { useState, useEffect, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { GardenContext } from './../../contexts/ZenGardenContexts';
-
-// const SEARCH_ENDPOINT = 'http://localhost:8000/trees?q=';
+import styles from './ZenSearch.module.css';
 
 function ZenSearch() {
-  const [garden, setGarden] = useState(() => {
-    return JSON.parse(localStorage.getItem('garden')) || [];
-  });
+  const { filterTrees } = useContext(GardenContext);
 
-  const [filteredTree, setFilteredTree] = useState(() => [...garden]);
   const [searchTerm, setSearchTerm] = useState('');
 
   let handleChange = (e) => {
-    console.log(e.target.value);
-    setSearchTerm(e.target.value);
+    const term = e.target.value.toLowerCase();
+    console.log(term);
+    setSearchTerm(term);
+    filterTrees(term);
   };
 
-  useEffect(() => {
-    // Filter
-    const filtered = garden.filter((tree) =>
-      tree.name.toLowerCase().includes(searchTerm),
-    );
-    console.log('filtered trees', filtered);
-    // I would expect set garden here to render the filtered trees
-    console.log('current garden', garden);
-    setGarden(filtered);
-    console.log('new garden', garden);
-  }, [filteredTree, searchTerm, setGarden]);
-
   return (
-    <div>
-      <form>
-        <label>Search</label>
+    <div className="filterContainer">
+      <form className={styles.filterBox}>
+        <label htmlFor="searchTerm" className={styles.filterText}>
+          Check out one type of tree ...
+        </label>
         <input
+          className={styles.filterInput}
           type="text"
-          placeholder="search"
-          className="search"
+          placeholder="tree name"
           onChange={handleChange}
           value={searchTerm}
         ></input>

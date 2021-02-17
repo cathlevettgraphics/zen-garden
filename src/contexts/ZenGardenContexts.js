@@ -1,5 +1,8 @@
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useState } from 'react';
 import { useToasts } from 'react-toast-notifications';
+
+// This array used for filtering
+let trees = [];
 
 // Create context
 export const GardenContext = createContext({
@@ -7,6 +10,7 @@ export const GardenContext = createContext({
   addTree: () => {},
   updateTree: () => {},
   deleteTree: () => {},
+  filterTrees: () => {},
   loaded: false,
   loading: false,
   error: null,
@@ -40,12 +44,25 @@ export const GardenProvider = (props) => {
       }
       const data = await response.json();
       localStorage.setItem('garden', JSON.stringify(data));
+      trees = data;
       setGarden(data);
     } catch (err) {
       setError(err.message || err.statusText);
     } finally {
       setLoading(false);
       setLoaded(true);
+    }
+  };
+
+  const filterTrees = (term = '') => {
+    if (term) {
+      console.log(`filtering for ${term}`);
+      const filtered = trees.filter((tree) =>
+        tree.name.toLowerCase().includes(term),
+      );
+      console.log('trees', trees);
+      console.log('filtered', filtered);
+      setGarden(filtered);
     }
   };
 
@@ -170,6 +187,7 @@ export const GardenProvider = (props) => {
         garden,
         loading,
         error,
+        filterTrees,
         fetchGarden,
         addTree,
         updateTree,
