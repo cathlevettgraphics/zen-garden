@@ -27,7 +27,8 @@ export const GardenProvider = (props) => {
   const [error, setError] = useState(null);
   const { addToast } = useToasts();
 
-  const GARDEN_ENDPOINT = 'http://localhost:8000/trees/';
+  const GARDEN_ENDPOINT =
+    'https://server-zen-garden-api.herokuapp.com/api/v1/trees/';
 
   const searchGarden = async () => {};
 
@@ -97,11 +98,11 @@ export const GardenProvider = (props) => {
     }
   };
 
-  const updateTree = async (id, updates) => {
-    console.log('updating', id, updates);
+  const updateTree = async (_id, updates) => {
+    console.log('updating', _id, updates);
     let updatedTree = null;
     try {
-      const response = await fetch(`${GARDEN_ENDPOINT}${id}`, {
+      const response = await fetch(`${GARDEN_ENDPOINT}${_id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -112,7 +113,7 @@ export const GardenProvider = (props) => {
         throw response;
       }
       // Changed database id to string as that is what useParam uses
-      const index = garden.findIndex((tree) => tree.id === id);
+      const index = garden.findIndex((tree) => tree._id === _id);
 
       // Get the tree
       const oldTree = garden[index];
@@ -147,22 +148,23 @@ export const GardenProvider = (props) => {
   };
 
   // Delete tree
-  const deleteTree = async (id) => {
+  const deleteTree = async (_id) => {
     let deletedTree = null;
     try {
-      const response = await fetch(`${GARDEN_ENDPOINT}${id}`, {
+      const response = await fetch(`${GARDEN_ENDPOINT}${_id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
         },
       });
-      if (response.status !== 200) {
+      if (response.status !== 204) {
         throw response;
       }
       // Get index
-      const index = garden.findIndex((tree) => tree.id === id);
+      const index = garden.findIndex((tree) => tree._id === _id);
+      // console.log('idx:', index);
       deletedTree = garden[index];
-      // console.log({ deletedTree, index });
+      // console.log('DEL', deletedTree, index);
       // recreate the garden array without that tree
       const updatedTrees = [
         ...garden.slice(0, index),

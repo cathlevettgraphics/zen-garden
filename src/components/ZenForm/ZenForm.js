@@ -16,12 +16,11 @@ const schema = yup.object().shape({
 });
 
 function ZenForm() {
-  let { id } = useParams();
+  let { id: _id } = useParams();
   let history = useHistory();
   const { addTree, updateTree, garden } = useContext(GardenContext);
 
   let defaultValues = {
-    id: '',
     name: '',
     tree: '',
     leaves: '',
@@ -31,24 +30,25 @@ function ZenForm() {
 
   let submitHandler = () => {};
 
-  if (id) {
+  if (_id) {
     // Alias the id from the data to avoid collision with useParams()
-    const treeToBeUpdated = garden.find(({ id: ID }) => ID === id);
+    const treeToBeUpdated = garden.find(({ _id: ID }) => ID === _id);
     submitHandler = (vals) => {
       console.log('update values', vals);
-      updateTree(id, vals);
+      updateTree(_id, vals);
       history.push('/');
     };
     if (treeToBeUpdated) {
       defaultValues = treeToBeUpdated;
     } else {
-      throw new Error(`Couldn't find the tree with id ${id}`);
+      throw new Error(`Couldn't find the tree with id ${_id}`);
     }
   } else {
     submitHandler = (vals) => {
       console.log('add value', vals);
       reset(defaultValues);
       addTree(vals);
+      history.push('/');
     };
   }
 
